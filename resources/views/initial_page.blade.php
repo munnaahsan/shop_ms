@@ -9,6 +9,8 @@
     <form action="" method="post">
         <h2>Name</h2>
         <input type="name">
+        <h2>Status</h2>
+        <input type="status">
     </form>
 </body>
 </html>
