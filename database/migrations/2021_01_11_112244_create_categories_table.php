@@ -15,13 +15,9 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('p_category');
-            $table->string('p_name');
-            $table->string('p_price');
-            $table->string('p_selling_price');
-            $table->string('p_quantity');
-            $table->string('p_uom');
-            $table->string('p_status');
+            $table->unsignedBigInteger('category_id');
+            $table->string('name');
+            $table->string('remarks');
             $table->timestamps();
         });
     }
