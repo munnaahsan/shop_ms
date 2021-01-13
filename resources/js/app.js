@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 
+<<<<<<< Updated upstream
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
@@ -40,3 +41,15 @@ const app = new Vue({
     el: '#app',
     router
 });
+=======
+window.Vue = require('vue')
+
+// Vue.component('mainapp', require('./components/mainapp.vue').default)
+Vue.component(
+    'example-component',
+    require('./components/ExampleComponent').default
+);
+const app = new Vue({
+    el: '#app'
+})
+>>>>>>> Stashed changes

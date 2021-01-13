@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
+        <div id="app">
+            <mainapp></mainapp>
+        </div>
         <!-- Styles -->
         <style>
             html, body {

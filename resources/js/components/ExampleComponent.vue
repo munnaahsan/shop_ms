@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -21,3 +22,19 @@
         }
     }
 </script>
+=======
+  <div>
+      Vue Template
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
+>>>>>>> Stashed changes
