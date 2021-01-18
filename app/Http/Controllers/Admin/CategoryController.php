@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $request->name,
-            'slug' => $this->slugify($request->name),
+            'slug' => slugify($request->name),
             'remarks' => $request->remarks,
         ]);
     }
@@ -58,9 +58,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->first();
+
+        return response()->json(['category', $category], 200);
     }
 
     /**
@@ -85,13 +87,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|min:5|max:100',
-            'status' => 'required'
+            'remarks' => 'required'
         ]);
 
         $category = Category::find($request->id);
         $category->name = $request->name;
         $category->slug = slugify($request->name);
-        $category->status = $request->status;;
+        $category->remarks = $request->remarks;
         if ($category->save()) {
             $success = true;
         }else{
@@ -107,34 +109,15 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($slug)
     {
-        //
-    }
-
-    public function slugify($text)
-    {
-        //replace non latter or digits by
-        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-        //translate
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-        //trim
-        $text = trim($text, '-');
-
-        //remove duplicate
-        $text = preg_replace('~-+~', '-', $text);
-
-        //lowercase
-        $text = strtolower($text);
-
-        if (empty($text)) {
-            return 'n-a';
+        $category = Category::where('slug', $slug)->first();
+        if ($category->delete()) {
+            $success = true;
+        }else {
+            $success = false;
         }
 
-        return $text;
-
-
+        return response()->json(['success', $success], 200);
     }
 }

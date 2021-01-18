@@ -8,17 +8,32 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 //V form
-import {AlertError, Form, HasError} from 'vform'
+import { AlertError, Form, HasError } from 'vform'
 window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 //Vue Router
 import VueRouter from 'vue-router';
-import {routes} from './routes/routes'
+import { routes } from './routes/routes'
 Vue.use(VueRouter);
 //toastr
 import toastr from 'toastr'
 window.toastr = toastr;
+//Sweet Altert
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+window.Toast = Toast;
 
 // Vuex
 import Vuex from 'vuex'
