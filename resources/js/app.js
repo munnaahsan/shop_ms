@@ -7,9 +7,27 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
+//V form
+import {AlertError, Form, HasError} from 'vform'
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+//Vue Router
 import VueRouter from 'vue-router';
 import {routes} from './routes/routes'
 Vue.use(VueRouter);
+//toastr
+import toastr from 'toastr'
+window.toastr = toastr;
+
+// Vuex
+import Vuex from 'vuex'
+import storeData from "./store/store";
+
+Vue.use(Vuex)
+const store = new Vuex.Store(
+    storeData
+)
 
 const router = new VueRouter({
     routes,
@@ -37,5 +55,6 @@ Vue.component('home', require('./components/backend/home').default);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });
