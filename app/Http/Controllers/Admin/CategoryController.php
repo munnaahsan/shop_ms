@@ -79,11 +79,26 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:5|max:100',
+            'status' => 'required'
+        ]);
+
+        $category = Category::find($request->id);
+        $category->name = $request->name;
+        $category->slug = slugify($request->name);
+        $category->status = $request->status;;
+        if ($category->save()) {
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return response()->json(['success', $success], 200);
     }
 
     /**

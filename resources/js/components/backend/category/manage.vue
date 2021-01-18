@@ -110,8 +110,8 @@
 <!--                                <td></td>-->
                                 <td>
                                     <!--      router-link         :to="`/edit-category/${category.slug}`"         ${category.slug}-->
-                                    <a class="text-cyan" ><i
-                                        class="fas fa-edit"></i></a>
+                                    <router-link :to="`/edit-category/${category.slug}`" class="text-cyan" ><i
+                                        class="fas fa-edit"></i></router-link>
 <!--                                    @click="remove(category.slug)"-->
                                     <span class="text-danger" style="cursor: pointer" ><i
                                         class="fas fa-trash-alt"></i></span>
@@ -232,7 +232,7 @@
             // By The actions option of js file
             // document.querySelector('#display').style.display = 'none';
             this.$store.dispatch("getCategories");
-            // this.editCategory();
+            this.editCategory();
         },
         methods: {
             addCategory: function () {
@@ -257,6 +257,15 @@
                         category.form.name = null;
                         category.form.remarks = null;
                     })
+            },
+            editCategory: function(){
+                const this_ = this;
+                axios.get("/show-category/"+this.$route.params.slug).then((response)=>{
+                    this_.form.fill(response.data[1])
+                    // console.log(response.data[1])
+                }).catch(()=>{
+
+                })
             },
             hide(){
                 this.hideForm = false;
