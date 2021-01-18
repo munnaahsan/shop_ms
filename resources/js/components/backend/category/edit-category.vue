@@ -39,7 +39,8 @@
                         <div class="modal-footer">
                             <div class="btn-group w-25" role="group" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
                                 <button class="btn btn-sm btn-primary" title="Save Your Content" type="submit">
-                                    <i class="fas fa-save fa-1x"></i>
+<!--                                    <i class="fas fa-save fa-1x"></i>-->
+                                    <i class="fas fa-sync-alt fa-1x"></i>
                                 </button>
                                 <router-link to="/categories" class="btn btn-secondary float-right btn-sm">
 <!--                                    <i class="fas fa-arrow-alt-circle-left"></i>-->

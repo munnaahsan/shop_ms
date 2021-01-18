@@ -2033,6 +2033,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "manage",
   data: function data() {
@@ -39731,7 +39732,7 @@ var staticRenderFns = [
         staticClass: "btn btn-sm btn-primary",
         attrs: { title: "Save Your Content", type: "submit" }
       },
-      [_c("i", { staticClass: "fas fa-save fa-1x" })]
+      [_c("i", { staticClass: "fas fa-sync-alt fa-1x" })]
     )
   }
 ]
