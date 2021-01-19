@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <span class="card-title">Categories</span>
+                                        <span class="card-title text-uppercase">Categories</span>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">

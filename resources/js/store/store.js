@@ -1,14 +1,14 @@
 export default {
     state: {
-        postData: [],
+        supplierData: [],
         categoryData: []
     },
     getters: {
         categories(state) {
             return state.categoryData
         },
-        posts(state) {
-            return state.postData
+        suppliers(state) {
+            return state.supplierData
         }
     },
     actions: {
@@ -21,11 +21,12 @@ export default {
 
             })
         },
-        getPosts(data) {
+        getSuppliers(data) {
             // console.log("text")
-            axios.get("get-posts")
+            axios.get("get-suppliers")
                 .then((response) => {
-                    data.commit("posts", response.data.posts)
+                    // console.log(response)
+                    data.commit("suppliers", response.data.suppliers)
                 }).catch((error) => {
             })
         }
@@ -34,8 +35,8 @@ export default {
         categories(state, data) {
             state.categoryData = data
         },
-        posts(state, data) {
-            state.postData = data
+        suppliers(state, data) {
+            state.supplierData = data
         }
     }
 }

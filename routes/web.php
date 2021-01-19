@@ -27,3 +27,5 @@ Route::post('/update-category', 'Admin\CategoryController@update')->name('update
 Route::post('/add-category', 'Admin\CategoryController@store')->name('add-category');
 Route::get('/remove-category/{slug}', 'Admin\CategoryController@destroy');
 Route::post('/categories/remove-items', 'Admin\CategoryController@removeItems');
+
+Route::get('/get-suppliers', 'Admin\SupplierController@index');

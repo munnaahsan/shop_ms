@@ -17,6 +17,7 @@ class CreateSuppliersTable extends Migration
             $table->id();
             $table->string('s_name');
             $table->string('s_contact');
+            $table->string('slug');
             $table->string('s_email')->unique();
             $table->string('s_address')->nullable();
             $table->string('s_remarks')->nullable();
