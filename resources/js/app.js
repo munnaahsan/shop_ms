@@ -43,6 +43,10 @@ Vue.use(Vuex)
 const store = new Vuex.Store(
     storeData
 )
+import { jsPDF } from "jspdf";
+const pdfDoc = new jsPDF();
+import 'jspdf-autotable'
+window.pdfDoc = pdfDoc;
 
 const router = new VueRouter({
     routes,

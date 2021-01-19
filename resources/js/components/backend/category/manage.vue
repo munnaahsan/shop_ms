@@ -46,10 +46,17 @@
                                         <span class="card-title">Categories</span>
                                     </div>
                                     <div class="col-md-8">
-                                        <!--                                        :disabled="!isSelected" @click="removeItems(selected)"-->
-                                        <button data-toggle="tooltip" data-placement="bottom" title="Delete" id="display" class="text-danger border-0" type="button">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div class="row">
+                                            <button data-toggle="tooltip" data-placement="bottom" title="Delete"
+                                                    :disabled="!isSelected" @click="removeItems(selected)"
+                                                    id="display" class="btn btn-sm btn-outline-danger" type="button">
+                                                <i class="fas fa-trash"></i>
+                                            </button>&nbsp;&nbsp;
+                                            <button style="cursor: pointer;background-image: linear-gradient(#7a9cac, #6fb6d4)" class="btn btn-sm border-0"
+                                                    @click="generatePDF" id="pdf" data-toggle="tooltip" data-placement="bottom" title="Generate PDF">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -71,8 +78,8 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <!--                                  v-model="multiDelete"  :disabled="emptyData()" @click="selectAll"-->
-                                        <input style="cursor: pointer" type="checkbox">
+                                        <input :disabled="emptyData()" @click="selectAll" style="cursor: pointer"
+                                               type="checkbox" v-model="multiDelete">
                                     </th>
                                     <th>Sl. No.</th>
                                     <th>Name</th>
@@ -86,20 +93,14 @@
                                 <!--                v-for="(category, i) in categories"            @click="visible = !visible"-->
                                 <tr v-for="(category, i) in categories">
                                     <td>
-                                        <!--                        v-model="selected"            :value="category.id"-->
-                                        <input style="cursor: pointer" type="checkbox">
+                                        <input :value="category.id" style="cursor: pointer"
+                                           type="checkbox" v-model="selected">
                                     </td>
-                                    <!--                                {{ ++i }}-->
                                     <td>{{ ++i }}</td>
-                                    <!--                                {{ category.name }}-->
                                     <td>{{ category.name }}</td>
                                     <td>{{ category.slug }}</td>
-                                    <!--                                {{ category.slug }}-->
                                     <td>{{ category.remarks }}</td>
-                                    <!--                                {{ category.created_at | time}}-->
-                                    <!--                                <td></td>-->
                                     <td>
-                                        <!--      router-link         :to="`/edit-category/${category.slug}`"         ${category.slug}-->
                                         <router-link :to="`/edit-category/${category.slug}`" class="text-cyan"><i class="fas fa-edit"></i></router-link>
                                         <span class="text-danger" @click="remove(category.slug)" style="cursor: pointer"><i class="fas fa-trash-alt"></i></span>
                                     </td>
@@ -113,11 +114,11 @@
                                 <!--                                    </button>-->
                                 <!--                                </td>-->
                                 <!--                            </tr>-->
-                                <!--                            <tr v-if="emptyData()">-->
-                                <!--                                <td colspan="6">-->
-                                <!--                                    <h6 class="text-center text-danger">Data Not Found !!</h6>-->
-                                <!--                                </td>-->
-                                <!--                            </tr>-->
+                                <tr v-if="emptyData()">
+                                    <td colspan="6">
+                                        <h6 class="text-center text-danger">Data Not Found !!</h6>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -205,6 +206,9 @@ export default {
                 remarks: null,
             }),
             hideForm: false,
+            selected: [],
+            multiDelete: false,
+            isSelected: false,
         }
     },
     computed: {
@@ -216,9 +220,30 @@ export default {
         // By Mounted Hit A Method of actions option of js file
         // Whenever Load The Component Data will get from database
         // By The actions option of js file
-        // document.querySelector('#display').style.display = 'none';
+        document.querySelector('#display').style.display = 'none';
         this.$store.dispatch("getCategories");
+        $('#pdf').tooltip()
         // this.editCategory();
+    },
+    watch: {
+        selected: function (selected) {
+            // this.visible = true;
+            if (selected.length > 0)
+            {
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
+                document.querySelector('#display').style.display = 'block';
+            }else
+            {
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip('hide')
+                })
+                document.querySelector('#display').style.display = 'none';
+            }
+            this.isSelected = (selected.length > 0);
+            this.multiDelete = (selected.length === this.categories.length);
+        }
     },
     methods: {
         addCategory: function() {
@@ -293,10 +318,51 @@ export default {
         },
         hide() {
             this.hideForm = false;
+        },
+        emptyData() {
+            return (this.categories.length < 1)
+        },
+        selectAll: function (event) {
+            if (event.target.checked === false) {
+                this.selected = []
+                // document.querySelector('#display').style.display = 'none';
+            } else {
+                // document.querySelector('#display').style.display = 'block';
+                this.categories.forEach((category) => {
+                    if (this.selected.indexOf(category.id) === -1)
+                    {
+                        this.selected.push(category.id)
+                    }
+                })
+            }
+        },
+        removeItems: function (selected) {
+            // console.log(selected)
+            axios.post("/categories/remove-items",{data: selected}).then((response) => {
+                // console.log(response.data)
+                this.selected = [],
+                    this.multiDelete = false,
+                    this.isSelected = false,
+                    this.$store.dispatch("getCategories")
+                toastr.success(response.data.total + ' Category has been deleted successfully !!')
+            }).catch((error) => {
+
+            })
+        },
+        generatePDF: function()
+        {
+            //initialize a new instance of jsPDF
+            pdfDoc.autoTable({ html: '#example1' })
+            // pdfDoc.html("get-categories",15,15)
+            pdfDoc.save("pdf.pdf")
+            $('#pdf').tooltip('hide')
         }
     }
 }
 
 </script>
 <style scoped>
+    #pdf:hover{
+        color: #f9d6d5;
+    }
 </style>

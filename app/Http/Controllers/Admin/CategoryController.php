@@ -107,7 +107,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($slug)
     {
@@ -119,5 +119,24 @@ class CategoryController extends Controller
         }
 
         return response()->json(['success', $success], 200);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeItems(Request $request)
+    {
+//        return $request;exit();
+        $sl = 0;
+        foreach ($request->data as $id)
+        {
+            $category = Category::find($id);
+            $category->delete();
+            $sl++;
+        }
+        $success = $sl > 0 ? true : false;
+        return response()->json(['success' => $success, 'total' => $sl], 200);
     }
 }

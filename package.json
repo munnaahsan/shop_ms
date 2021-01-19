@@ -26,6 +26,8 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
         "admin-lte": "^3.1.0-rc",
+        "jspdf": "^2.3.0",
+        "jspdf-autotable": "^3.5.13",
         "sweetalert2": "^10.13.0",
         "toastr": "^2.1.4",
         "vform": "^1.0.1",
