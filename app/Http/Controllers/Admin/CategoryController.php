@@ -56,7 +56,7 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($slug)
     {

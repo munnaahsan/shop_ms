@@ -29,3 +29,6 @@ Route::get('/remove-category/{slug}', 'Admin\CategoryController@destroy');
 Route::post('/categories/remove-items', 'Admin\CategoryController@removeItems');
 
 Route::get('/get-suppliers', 'Admin\SupplierController@index');
+Route::post('/add-suppliers', 'Admin\SupplierController@store')->name('add-suppliers');
+Route::post('/update-supplier', 'Admin\SupplierController@update')->name('update-supplier');
+Route::get('/show-suppliers/{slug}', 'Admin\SupplierController@show')->name('show-suppliers');
