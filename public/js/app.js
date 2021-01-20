@@ -2998,6 +2998,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "manage",
   data: function data() {
@@ -3053,7 +3061,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // console.log('test');
-      var category = this;
+      var supplier = this;
       this.form.post('/add-suppliers').then(function (response) {
         // console.log(data)
         // Toast.fire({
@@ -3067,8 +3075,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.dispatch("getSuppliers"); // category.$router.push("/categories");
 
 
-        category.form.name = null;
-        category.form.remarks = null;
+        supplier.form.s_name = null;
+        supplier.form.s_contact = null;
+        supplier.form.s_email = null;
+        supplier.form.s_address = null;
+        supplier.form.s_remarks = null;
       });
     },
     editCategory: function editCategory() {
@@ -3097,7 +3108,7 @@ __webpack_require__.r(__webpack_exports__);
         reverseButtons: true
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios.get("remove-category/" + slug).then(function (response) {
+          axios.get("remove-supplier/" + slug).then(function (response) {
             _this2.$store.dispatch("getCategories"), // toastr.success('Category Deleted Successfully !!')
             swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
           })["catch"](function (error) {});
@@ -50448,7 +50459,7 @@ var render = function() {
                                   name: "s_address",
                                   id: "s_address",
                                   cols: "30",
-                                  placeholder: "Wright Your Remarks"
+                                  placeholder: "Wright Your Address"
                                 },
                                 domProps: { value: _vm.form.s_address },
                                 on: {
@@ -50659,7 +50670,7 @@ var render = function() {
                 },
                 [
                   _c("thead", [
-                    _c("tr", [
+                    _c("tr", { staticClass: "text-nowrap" }, [
                       _c("th", [
                         _c("input", {
                           directives: [
@@ -50800,14 +50811,26 @@ var render = function() {
                                 [_c("i", { staticClass: "fas fa-edit" })]
                               ),
                               _vm._v(" "),
-                              _vm._m(2, true)
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "text-danger",
+                                  staticStyle: { cursor: "pointer" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.remove(supplier.slug)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-trash-alt" })]
+                              )
                             ],
                             1
                           )
                         ])
                       }),
                       _vm._v(" "),
-                      _vm.emptyData() ? _c("tr", [_vm._m(3)]) : _vm._e()
+                      _vm.emptyData() ? _c("tr", [_vm._m(2)]) : _vm._e()
                     ],
                     2
                   )
@@ -50843,16 +50866,6 @@ var staticRenderFns = [
         _vm._v("suppliers")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "text-danger", staticStyle: { cursor: "pointer" } },
-      [_c("i", { staticClass: "fas fa-trash-alt" })]
-    )
   },
   function() {
     var _vm = this

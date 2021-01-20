@@ -32,7 +32,8 @@
                                         <div class="form-group">
                                             <label for="s_email">E-Mail</label>
                                             <input type="tel" name="s_email" id="s_email"
-                                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Enter Your E-Mail" class="form-control"
+                                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                   placeholder="Enter Your E-Mail" class="form-control"
                                                    :class="{'is-invalid': form.errors.has('s_email')}"
                                                    v-model="form.s_email">
                                             <has-error :form="form" field="s_contact"></has-error>
@@ -41,14 +42,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="s_address">Address</label>
-                                            <textarea class="form-control" v-model="form.s_address" name="s_address" id="s_address" cols="30" :class="{'is-invalid': form.errors.has('s_address')}" placeholder="Wright Your Remarks" style="height: 37px"></textarea>
+                                            <textarea class="form-control" v-model="form.s_address"
+                                                      name="s_address" id="s_address" cols="30"
+                                                      :class="{'is-invalid': form.errors.has('s_address')}"
+                                                      placeholder="Wright Your Address" style="height: 37px"></textarea>
                                             <has-error :form="form" field="s_address"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="s_remarks">Remarks</label>
-                                            <textarea class="form-control" v-model="form.s_remarks" name="s_remarks" id="s_remarks" cols="30" :class="{'is-invalid': form.errors.has('s_remarks')}" placeholder="Wright Your Remarks" style="height: 37px"></textarea>
+                                            <textarea class="form-control" v-model="form.s_remarks"
+                                                      name="s_remarks" id="s_remarks" cols="30"
+                                                      :class="{'is-invalid': form.errors.has('s_remarks')}"
+                                                      placeholder="Wright Your Remarks" style="height: 37px"></textarea>
                                             <has-error :form="form" field="s_remarks"></has-error>
                                         </div>
                                     </div>
@@ -107,7 +114,7 @@
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
+                                <tr class="text-nowrap">
                                     <th>
                                         <input :disabled="emptyData()" @click="selectAll" style="cursor: pointer"
                                                type="checkbox" v-model="multiDelete">
@@ -136,9 +143,10 @@
                                     <td>{{ supplier.s_address }}</td>
                                     <td>{{ supplier.s_remarks }}</td>
                                     <td>
-<!--                                        :to="`/edit-category/${category.slug}`" @click="remove(category.slug)"-->
                                         <router-link class="text-cyan" :to="`/edit-supplier/${supplier.slug}`"><i class="fas fa-edit"></i></router-link>
-                                        <span class="text-danger" style="cursor: pointer"><i class="fas fa-trash-alt"></i></span>
+                                        <span class="text-danger" @click="remove(supplier.slug)" style="cursor: pointer">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr v-if="emptyData()">
@@ -211,7 +219,7 @@ export default {
     methods: {
         addSupplier: function() {
             // console.log('test');
-            let category = this;
+            let supplier = this;
             this.form.post('/add-suppliers')
                 .then((response) => {
                     // console.log(data)
@@ -224,8 +232,11 @@ export default {
                     this.hideForm = false
                     this.$store.dispatch("getSuppliers")
                     // category.$router.push("/categories");
-                    category.form.name = null;
-                    category.form.remarks = null;
+                    supplier.form.s_name = null;
+                    supplier.form.s_contact = null;
+                    supplier.form.s_email = null;
+                    supplier.form.s_address = null;
+                    supplier.form.s_remarks = null;
                 })
         },
         editCategory: function() {
@@ -256,7 +267,7 @@ export default {
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.get("remove-category/" + slug).then((response) => {
+                    axios.get("remove-supplier/" + slug).then((response) => {
                         this.$store.dispatch("getCategories"),
                             // toastr.success('Category Deleted Successfully !!')
                             swalWithBootstrapButtons.fire(

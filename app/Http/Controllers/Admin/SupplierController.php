@@ -48,14 +48,22 @@ class SupplierController extends Controller
             's_remarks' => 'required'
         ]);
 
-        Supplier::create([
-            's_name' => $request->s_name,
-            's_contact' => $request->s_contact,
-            'slug' => slugify($request->s_name),
-            's_email' => $request->s_email,
-            's_address' => $request->s_address,
-            's_remarks' => $request->s_remarks,
-        ]);
+        $supplier = new Supplier;
+        $supplier->s_name = $request->s_name;
+        $supplier->s_contact = $request->s_contact;
+        $supplier->slug = slugify($request->s_name);
+        $supplier->s_email = $request->s_email;
+        $supplier->s_address = $request->s_address;
+        $supplier->s_remarks = $request->s_remarks;
+        $supplier->save();
+//        Supplier::create([
+//            's_name' => $request->s_name,
+//            's_contact' => $request->s_contact,
+//            's_email' => $request->s_email,
+//            's_address' => $request->s_address,
+//            's_remarks' => $request->s_remarks,
+//            'slug' => slugify($request->s_name)
+//        ]);
     }
 
     /**
@@ -98,7 +106,7 @@ class SupplierController extends Controller
             's_address' => 'required',
             's_remarks' => 'required'
         ]);
-        $supplier = Supplier::find($request->slug);
+        $supplier = Supplier::find($request->id);
         $supplier->s_name = $request->s_name;
         $supplier->s_contact = $request->s_contact;
         $supplier->slug = slugify($request->s_name);
@@ -118,10 +126,17 @@ class SupplierController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\supplier  $supplier
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(supplier $supplier)
+    public function destroy($slug)
     {
-        //
+        $supplier = Supplier::where('slug', $slug)->first();
+        if ($supplier->delete()) {
+            $success = true;
+        }else {
+            $success = false;
+        }
+
+        return response()->json(['success', $success], 200);
     }
 }
