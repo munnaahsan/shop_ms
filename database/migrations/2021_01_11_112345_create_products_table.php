@@ -22,9 +22,9 @@ class CreateProductsTable extends Migration
             $table->string('p_quantity');
             $table->string('p_barcode');
             $table->string('p_status');
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 
