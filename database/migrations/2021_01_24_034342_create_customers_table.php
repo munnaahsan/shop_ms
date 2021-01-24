@@ -21,9 +21,10 @@ class CreateCustomersTable extends Migration
             $table->string('c_address')->nullable();
             $table->string('c_phone')->nullable();
             $table->string('c_type')->nullable();
-            $table->string('c_gift_card')->nullable();            
-            $table->string('c_remarks')->nullable();            
-            $table->string('cst_sales_invoice')->unique();    // relation hobe        
+            $table->string('c_gift_card')->nullable();
+            $table->string('c_remarks')->nullable();
+            $table->string('cst_sales_invoice')->unique();    // relation hobe
+            $table->timestamps();
         });
     }
 
