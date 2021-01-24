@@ -4,62 +4,94 @@
             <div class="col-md-12">
                 <div class="card" v-if="hideForm">
                     <!--                    @submit.prevent="addCategory"-->
-                    <form @submit.prevent="addSupplier">
+                    <form @submit.prevent="addCustomers">
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_name">Name</label>
-                                            <input class="form-control" id="s_name"
-                                                   :class="{'is-invalid': form.errors.has('s_name')}"
-                                                   name="s_name" placeholder="Enter Supliers Name" type="text"
-                                                   v-model="form.s_name">
-                                            <has-error :form="form" field="s_name"></has-error>
+                                            <label for="c_name">Name</label>
+                                            <input class="form-control" id="c_name"
+                                                   :class="{'is-invalid': form.errors.has('c_name')}"
+                                                   name="c_name" placeholder="Enter Customers Name" type="text"
+                                                   v-model="form.c_name">
+                                            <has-error :form="form" field="c_name"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_phone">Phone</label>
-                                            <input type="tel" name="s_phone" id="s_phone"
+                                            <label for="c_phone">Phone</label>
+                                            <input type="tel" name="c_phone" id="c_phone"
                                                    maxlength="11" pattern="[0-9]{11}" placeholder="Enter Contact Number" class="form-control"
-                                                   :class="{'is-invalid': form.errors.has('s_phone')}"
-                                                   v-model="form.s_phone">
-                                            <has-error :form="form" field="s_phone"></has-error>
+                                                   :class="{'is-invalid': form.errors.has('c_phone')}"
+                                                   v-model="form.c_phone">
+                                            <has-error :form="form" field="c_phone"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_email">E-Mail</label>
-                                            <input type="tel" name="s_email" id="s_email"
+                                            <label for="c_email">E-Mail</label>
+                                            <input type="tel" name="c_email" id="c_email"
                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                    placeholder="Enter Your E-Mail" class="form-control"
-                                                   :class="{'is-invalid': form.errors.has('s_email')}"
-                                                   v-model="form.s_email">
-                                            <has-error :form="form" field="s_email"></has-error>
+                                                   :class="{'is-invalid': form.errors.has('c_email')}"
+                                                   v-model="form.c_email">
+                                            <has-error :form="form" field="c_email"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_address">Address</label>
-                                            <textarea class="form-control" v-model="form.s_address"
-                                                      name="s_address" id="s_address" cols="30"
-                                                      :class="{'is-invalid': form.errors.has('s_address')}"
+                                            <label for="c_address">Address</label>
+                                            <textarea class="form-control" v-model="form.c_address"
+                                                      name="c_address" id="c_address" cols="30"
+                                                      :class="{'is-invalid': form.errors.has('c_address')}"
                                                       placeholder="Wright Your Address" style="height: 37px"></textarea>
-                                            <has-error :form="form" field="s_address"></has-error>
+                                            <has-error :form="form" field="c_address"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_remarks">Remarks</label>
-                                            <textarea class="form-control" v-model="form.s_remarks"
-                                                      name="s_remarks" id="s_remarks" cols="30"
-                                                      :class="{'is-invalid': form.errors.has('s_remarks')}"
-                                                      placeholder="Wright Your Remarks" style="height: 37px"></textarea>
-                                            <has-error :form="form" field="s_remarks"></has-error>
+                                            <label for="c_type">Customer Type</label>
+                                            <input type="tel" name="c_type" id="c_type" placeholder="Enter Customer Type" class="form-control"
+                                                   :class="{'is-invalid': form.errors.has('c_type')}"
+                                                   v-model="form.c_type">
+                                            <has-error :form="form" field="c_type"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" v-if="addCoupon">
+                                        <div class="form-group">
+                                            <label for="c_coupon_code">Coupon Code</label>
+                                            <input type="tel" name="c_coupon_code" id="c_coupon_code"
+                                                   placeholder="Enter Coupon Code" class="form-control"
+                                                   :class="{'is-invalid': form.errors.has('c_coupon_code')}"
+                                                   v-model="form.c_coupon_code">
+<!--                                            v-model="$data[addCoupon ? form.c_coupon_code : !form.c_coupon_code]"-->
+                                            <has-error :form="form" field="c_coupon_code"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="c_remarks">Remarks</label>
+                                            <textarea class="form-control" v-model="form.c_remarks"
+                                                      name="c_remarks" id="c_remarks" cols="30"
+                                                      :class="{'is-invalid': form.errors.has('c_remarks')}"
+                                                      placeholder="Wright Your Remarks" style="height: 37px"></textarea>
+                                            <has-error :form="form" field="c_remarks"></has-error>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="btn-group" role="group" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);margin-top: 36px;">
+                                            <button data-toggle="tooltip" data-placement="bottom" title="Add Coupon"
+                                                    id="add_coupon" v-on:click="addCoupon = !addCoupon" class="btn btn-success" type="button">
+                                                <i class="fas fa-plus"></i> Add Field
+                                            </button>
+                                            <button data-toggle="tooltip" data-placement="bottom" title="Add Coupon"
+                                                    id="add_coupon_text" v-on:click="add_coupon" class="btn btn-success" type="button">
+                                                <i class="fas fa-plus"></i> Add Coupon Code
+                                            </button>
+                                        </div>
                                         <div class="btn-group float-right w-25" role="group" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);margin-top: 36px;">
                                             <button class="btn btn-primary" title="Save Your Content" type="submit">
                                                 <i class="fas fa-save fa-1x"></i>
@@ -84,9 +116,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
-<!--                                            @click="removeItems(selected)"-->
+<!--                                            @click="removeItems(selected)" :disabled="!isSelected"-->
                                             <button data-toggle="tooltip" data-placement="bottom" title="Delete"
-                                                    :disabled="!isSelected"
                                                     id="display" class="btn btn-sm btn-outline-danger" type="button">
                                                 <i class="fas fa-trash"></i>
                                             </button>&nbsp;&nbsp;
@@ -115,42 +146,46 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr class="text-nowrap">
-                                    <th>
-                                        <input :disabled="emptyData()" @click="selectAll" style="cursor: pointer"
-                                               type="checkbox" v-model="multiDelete">
-                                    </th>
+<!--                                    <th>-->
+<!--                                        <input :disabled="emptyData()" @click="selectAll" style="cursor: pointer"-->
+<!--                                               type="checkbox" v-model="multiDelete">-->
+<!--                                    </th>-->
                                     <th>Sl. No.</th>
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Slug</th>
                                     <th>E-Mail</th>
                                     <th>Address</th>
+                                    <th>Type</th>
+                                    <th>Coupon Code</th>
                                     <th>Remarks</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(supplier, i) in suppliers">
-                                    <td>
-                                        <input :value="supplier.id" style="cursor: pointer"
-                                           type="checkbox" v-model="selected">
-                                    </td>
+                                <tr v-for="(customer, i) in customers">
+<!--                                    <td>-->
+<!--                                        <input :value="customer.id" style="cursor: pointer"-->
+<!--                                           type="checkbox" v-model="selected">-->
+<!--                                    </td>-->
                                     <td>{{ ++i }}</td>
-                                    <td>{{ supplier.s_name }}</td>
-                                    <td>{{ supplier.s_phone }}</td>
-                                    <td>{{ supplier.s_slug }}</td>
-                                    <td>{{ supplier.s_email }}</td>
-                                    <td>{{ supplier.s_address }}</td>
-                                    <td>{{ supplier.s_remarks }}</td>
+                                    <td>{{ customer.c_name }}</td>
+                                    <td>{{ customer.c_phone }}</td>
+                                    <td>{{ customer.c_slug }}</td>
+                                    <td>{{ customer.c_email }}</td>
+                                    <td>{{ customer.c_address }}</td>
+                                    <td>{{ customer.c_type }}</td>
+                                    <td>{{ customer.c_coupon_code }}</td>
+                                    <td>{{ customer.c_remarks }}</td>
                                     <td>
-                                        <router-link class="text-cyan" :to="`/edit-supplier/${supplier.slug}`"><i class="fas fa-edit"></i></router-link>
-                                        <span class="text-danger" @click="remove(supplier.slug)" style="cursor: pointer">
+                                        <router-link class="text-cyan" :to="`/edit-supplier/${customer.slug}`"><i class="fas fa-edit"></i></router-link>
+                                        <span class="text-danger" @click="remove(customer.slug)" style="cursor: pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
                                     </td>
                                 </tr>
                                 <tr v-if="emptyData()">
-                                    <td colspan="8">
+                                    <td colspan="10">
                                         <h6 class="text-center text-danger">Data Not Found !!</h6>
                                     </td>
                                 </tr>
@@ -164,27 +199,31 @@
     </div>
 </template>
 <script>
+import { uuid } from 'vue-uuid' // Import uuid
 export default {
     name: "manage",
     data() {
         return {
             form: new Form({
-                s_name: null,
-                s_phone: null,
-                s_slug: null,
-                s_email: null,
-                s_address: null,
-                s_remarks: null,
+                c_name: null,
+                c_phone: null,
+                c_slug: null,
+                c_type: null,
+                c_email: null,
+                c_address: null,
+                c_coupon_code: null,
+                c_remarks: null,
             }),
             hideForm: false,
-            selected: [],
-            multiDelete: false,
-            isSelected: false,
+            addCoupon: false,
+            // selected: [],
+            // multiDelete: false,
+            // isSelected: false,
         }
     },
     computed: {
-        suppliers() {
-            return this.$store.getters.suppliers
+        customers() {
+            return this.$store.getters.customers
         }
     },
     mounted() {
@@ -192,35 +231,36 @@ export default {
         // Whenever Load The Component Data will get from database
         // By The actions option of js file
         document.querySelector('#display').style.display = 'none';
-        this.$store.dispatch("getSuppliers");
-        $('#pdf').tooltip()
+        // document.querySelector('#c_coupon_code').style.display = 'none';
+        this.$store.dispatch("getCustomers");
+        $('#pdf').tooltip();
         // this.editCategory();
     },
     watch: {
-        selected: function (selected) {
-            // this.visible = true;
-            if (selected.length > 0)
-            {
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip()
-                })
-                document.querySelector('#display').style.display = 'block';
-            }else
-            {
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip('hide')
-                })
-                document.querySelector('#display').style.display = 'none';
-            }
-            this.isSelected = (selected.length > 0);
-            this.multiDelete = (selected.length === this.suppliers.length);
-        }
+        // selected: function (selected) {
+        //     // this.visible = true;
+        //     if (selected.length > 0)
+        //     {
+        //         $(function () {
+        //             $('[data-toggle="tooltip"]').tooltip()
+        //         })
+        //         document.querySelector('#display').style.display = 'block';
+        //     }else
+        //     {
+        //         $(function () {
+        //             $('[data-toggle="tooltip"]').tooltip('hide')
+        //         })
+        //         document.querySelector('#display').style.display = 'none';
+        //     }
+        //     this.isSelected = (selected.length > 0);
+        //     this.multiDelete = (selected.length === this.customers.length);
+        // }
     },
     methods: {
-        addSupplier: function() {
+        addCustomers: function() {
             // console.log('test');
-            let supplier = this;
-            this.form.post('/add-suppliers')
+            let customer = this;
+            this.form.post('/add-customers')
                 .then((response) => {
                     // console.log(data)
                     // Toast.fire({
@@ -232,11 +272,12 @@ export default {
                     this.hideForm = false
                     this.$store.dispatch("getSuppliers")
                     // category.$router.push("/categories");
-                    supplier.form.s_name = null;
-                    supplier.form.s_contact = null;
-                    supplier.form.s_email = null;
-                    supplier.form.s_address = null;
-                    supplier.form.s_remarks = null;
+                    customer.form.c_name = null;
+                    customer.form.c_phone = null;
+                    customer.form.c_email = null;
+                    customer.form.c_type = null;
+                    customer.form.c_address = null;
+                    customer.form.c_remarks = null;
                 })
         },
         editCategory: function() {
@@ -294,7 +335,7 @@ export default {
             this.hideForm = false;
         },
         emptyData() {
-            return (this.suppliers.length < 1)
+            return (this.customers.length < 1)
         },
         selectAll: function (event) {
             if (event.target.checked === false) {
@@ -330,6 +371,22 @@ export default {
             // pdfDoc.html("get-categories",15,15)
             pdfDoc.save("pdf.pdf")
             $('#pdf').tooltip('hide')
+        },
+        generateUUID() { // Public Domain/MIT
+            var d = new Date().getTime();
+            if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+                d += performance.now(); //use high-precision timer if available
+            }
+            var newGuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (d + Math.random() * 16) % 16 | 0;
+                d = Math.floor(d / 16);
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+
+            return newGuid;
+        },
+        add_coupon: function() {
+            document.getElementById('c_coupon_code').value = this.generateUUID();
         }
     }
 }
@@ -339,19 +396,19 @@ export default {
     #pdf:hover{
         color: #f9d6d5;
     }
-    #s_phone:valid {
+    #c_phone:valid {
     color: green;
 }
 
-    #s_phone:invalid {
+    #c_phone:invalid {
         color: red;
     }
 
-    #s_email:valid {
+    #c_email:valid {
         color: green;
     }
 
-    #s_email:invalid {
+    #c_email:invalid {
         color: red;
     }
 </style>

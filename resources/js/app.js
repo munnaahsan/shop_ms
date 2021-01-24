@@ -53,6 +53,16 @@ const router = new VueRouter({
     // mode: 'history',
 })
 
+import UUID from 'vue-uuid'
+Vue.use(UUID);
+window.UUID = UUID;
+
+// import UniqueId from 'vue-unique-id';
+// or
+const UniqueId = require('vue-unique-id');
+
+Vue.use(UniqueId);
+window.UniqueId = UniqueId;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

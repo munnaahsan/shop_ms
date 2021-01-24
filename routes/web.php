@@ -33,3 +33,6 @@ Route::post('/add-suppliers', 'Admin\SupplierController@store')->name('add-suppl
 Route::post('/update-supplier', 'Admin\SupplierController@update')->name('update-supplier');
 Route::get('/show-suppliers/{slug}', 'Admin\SupplierController@show')->name('show-suppliers');
 Route::get('/remove-supplier/{slug}', 'Admin\SupplierController@destroy');
+
+Route::get('/get-customers', 'Admin\CustomerController@index');
+Route::post('/add-customers', 'Admin\CustomerController@store')->name('add-customers');
