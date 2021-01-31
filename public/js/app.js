@@ -3423,7 +3423,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         s_name: null,
         s_phone: null,
-        s_slug: null,
+        slug: null,
         s_email: null,
         s_address: null,
         s_remarks: null
@@ -52105,7 +52105,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(supplier.s_phone))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(supplier.s_slug))]),
+                          _c("td", [_vm._v(_vm._s(supplier.slug))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(supplier.s_email))]),
                           _vm._v(" "),

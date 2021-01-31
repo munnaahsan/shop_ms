@@ -138,7 +138,7 @@
                                     <td>{{ ++i }}</td>
                                     <td>{{ supplier.s_name }}</td>
                                     <td>{{ supplier.s_phone }}</td>
-                                    <td>{{ supplier.s_slug }}</td>
+                                    <td>{{ supplier.slug }}</td>
                                     <td>{{ supplier.s_email }}</td>
                                     <td>{{ supplier.s_address }}</td>
                                     <td>{{ supplier.s_remarks }}</td>
@@ -171,7 +171,7 @@ export default {
             form: new Form({
                 s_name: null,
                 s_phone: null,
-                s_slug: null,
+                slug: null,
                 s_email: null,
                 s_address: null,
                 s_remarks: null,
