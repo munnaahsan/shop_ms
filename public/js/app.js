@@ -2814,6 +2814,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // Import uuid
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2831,7 +2843,8 @@ __webpack_require__.r(__webpack_exports__);
         c_remarks: null
       }),
       hideForm: false,
-      addCoupon: false // selected: [],
+      addCoupon: false,
+      addCouponField: false // selected: [],
       // multiDelete: false,
       // isSelected: false,
 
@@ -2990,8 +3003,11 @@ __webpack_require__.r(__webpack_exports__);
       });
       return newGuid;
     },
+    coupon_code_erase: function coupon_code_erase() {
+      this.form.c_coupon_code = null;
+    },
     add_coupon: function add_coupon() {
-      document.getElementById('c_coupon_code').value = this.generateUUID();
+      this.form.c_coupon_code = this.generateUUID();
     }
   }
 });
@@ -50686,51 +50702,90 @@ var render = function() {
                               attrs: { role: "group" }
                             },
                             [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "bottom",
-                                    title: "Add Coupon",
-                                    id: "add_coupon",
-                                    type: "button"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.addCoupon = !_vm.addCoupon
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-plus" }),
-                                  _vm._v(
-                                    " Add Field\n                                            "
+                              !_vm.addCouponField
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: {
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Add Coupon",
+                                        id: "add_coupon",
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: [
+                                          _vm.coupon_code_erase,
+                                          function($event) {
+                                            ;(_vm.addCoupon = !_vm.addCoupon),
+                                              (_vm.addCouponField = true)
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-plus" }),
+                                      _vm._v(
+                                        " Add Field\n                                            "
+                                      )
+                                    ]
                                   )
-                                ]
-                              ),
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success",
-                                  attrs: {
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "bottom",
-                                    title: "Add Coupon",
-                                    id: "add_coupon_text",
-                                    type: "button"
-                                  },
-                                  on: { click: _vm.add_coupon }
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-plus" }),
-                                  _vm._v(
-                                    " Add Coupon Code\n                                            "
+                              _vm.addCouponField
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: {
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Close Add Coupon",
+                                        id: "not_add_coupon",
+                                        type: "button"
+                                      },
+                                      on: {
+                                        click: [
+                                          _vm.coupon_code_erase,
+                                          function($event) {
+                                            ;(_vm.addCoupon = !_vm.addCoupon),
+                                              (_vm.addCouponField = false)
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-minus" }),
+                                      _vm._v(
+                                        " Close Add Field\n                                            "
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.addCoupon
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: {
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Add Coupon",
+                                        id: "add_coupon_text",
+                                        type: "button"
+                                      },
+                                      on: { click: _vm.add_coupon }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-plus" }),
+                                      _vm._v(
+                                        " Add Coupon Code\n                                            "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
                             ]
                           ),
                           _vm._v(" "),
@@ -50821,25 +50876,49 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "btn btn-info float-right btn-sm",
-                      staticStyle: {
-                        "box-shadow": "3px 2px 10px rgba(0,0,0,0.3)"
-                      },
-                      attrs: { href: "javascript:void(0)", id: "add" },
-                      on: {
-                        click: function($event) {
-                          _vm.hideForm = !_vm.hideForm
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-plus-circle" }),
-                      _vm._v(" Add\n                                ")
-                    ]
-                  )
+                  !_vm.hideForm
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "btn btn-info float-right btn-sm",
+                          staticStyle: {
+                            "box-shadow": "3px 2px 10px rgba(0,0,0,0.3)"
+                          },
+                          attrs: { href: "javascript:void(0)", id: "add" },
+                          on: {
+                            click: function($event) {
+                              _vm.hideForm = true
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-plus-circle" }),
+                          _vm._v(" Add\n                                ")
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hideForm
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "btn btn-danger float-right btn-sm",
+                          staticStyle: {
+                            "box-shadow": "3px 2px 10px rgba(0,0,0,0.3)"
+                          },
+                          attrs: { href: "javascript:void(0)", id: "close" },
+                          on: {
+                            click: function($event) {
+                              _vm.hideForm = false
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-minus-circle" }),
+                          _vm._v(" Close\n                                ")
+                        ]
+                      )
+                    : _vm._e()
                 ])
               ])
             ]),
@@ -70278,7 +70357,7 @@ __webpack_require__.r(__webpack_exports__);
       // console.log("text")
       axios.get("get-customers").then(function (response) {
         // console.log(response)
-        data.commit("suppliers", response.data.suppliers);
+        data.commit("customers", response.data.customers);
       })["catch"](function (error) {});
     }
   },

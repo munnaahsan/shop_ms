@@ -83,11 +83,18 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="btn-group" role="group" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);margin-top: 36px;">
-                                            <button data-toggle="tooltip" data-placement="bottom" title="Add Coupon"
-                                                    id="add_coupon" v-on:click="addCoupon = !addCoupon" class="btn btn-success" type="button">
+                                            <button data-toggle="tooltip" v-if="!addCouponField" data-placement="bottom" title="Add Coupon"
+                                                    id="add_coupon" @click="coupon_code_erase" v-on:click="addCoupon = !addCoupon,addCouponField = true" class="btn btn-success" type="button">
                                                 <i class="fas fa-plus"></i> Add Field
                                             </button>
-                                            <button data-toggle="tooltip" data-placement="bottom" title="Add Coupon"
+                                            <button data-toggle="tooltip" v-if="addCouponField"
+                                                    data-placement="bottom" title="Close Add Coupon"
+                                                    id="not_add_coupon" @click="coupon_code_erase"
+                                                    v-on:click="addCoupon = !addCoupon,addCouponField = false"
+                                                    class="btn btn-danger" type="button">
+                                                <i class="fas fa-minus"></i> Close Add Field
+                                            </button>
+                                            <button data-toggle="tooltip" v-if="addCoupon" data-placement="bottom" title="Add Coupon"
                                                     id="add_coupon_text" v-on:click="add_coupon" class="btn btn-success" type="button">
                                                 <i class="fas fa-plus"></i> Add Coupon Code
                                             </button>
@@ -131,8 +138,13 @@
                             </div>
                             <div class="col-md-6">
                                 <!--                                data-toggle="modal" data-target="#category-add" -->
-                                <span href="javascript:void(0)" class="btn btn-info float-right btn-sm" id="add" v-on:click="hideForm = !hideForm" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
+                                <span href="javascript:void(0)" class="btn btn-info float-right btn-sm" id="add"
+                                      v-if="!hideForm" v-on:click="hideForm = true" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
                                     <i class="fas fa-plus-circle"></i> Add
+                                </span>
+                                <span href="javascript:void(0)" class="btn btn-danger float-right btn-sm" id="close"
+                                      v-if="hideForm" v-on:click="hideForm = false" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
+                                    <i class="fas fa-minus-circle"></i> Close
                                 </span>
                                 <!--                                <router-link to="/categories" class="btn btn-secondary float-right btn-sm mr-1"-->
                                 <!--                                             style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3); width: 60px">-->
@@ -216,6 +228,7 @@ export default {
             }),
             hideForm: false,
             addCoupon: false,
+            addCouponField: false,
             // selected: [],
             // multiDelete: false,
             // isSelected: false,
@@ -385,8 +398,11 @@ export default {
 
             return newGuid;
         },
+        coupon_code_erase: function(){
+            this.form.c_coupon_code = null
+        },
         add_coupon: function() {
-            document.getElementById('c_coupon_code').value = this.generateUUID();
+            this.form.c_coupon_code = this.generateUUID()
         }
     }
 }

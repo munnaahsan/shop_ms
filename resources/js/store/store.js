@@ -39,7 +39,7 @@ export default {
             axios.get("get-customers")
                 .then((response) => {
                     // console.log(response)
-                    data.commit("suppliers", response.data.suppliers)
+                    data.commit("customers", response.data.customers)
                 }).catch((error) => {
             })
         }
