@@ -92,7 +92,7 @@ export default {
                 id: null,
                 s_name: null,
                 s_contact: null,
-                slug: null,
+                s_slug: null,
                 s_email: null,
                 s_address: null,
                 s_remarks: null,
@@ -109,7 +109,7 @@ export default {
         // By Mounted Hit A Method of actions option of js file
         // Whenever Load The Component Data will get from database
         // By The actions option of js file
-        this.$store.dispatch("getCategories");
+        this.$store.dispatch("getSuppliers");
         this.editSupplier();
     },
     methods: {
@@ -125,14 +125,14 @@ export default {
                     //     icon: 'success',
                     //     title: 'Category Created successfully'
                     // })
-                    // this.$store.dispatch("getCategories")
+                    // this.$store.dispatch("getSuppliers")
                     // $('#category-add').modal('hide');
                     // category.$router.push("/categories");
                 })
         },
         editSupplier: function() {
             const this_ = this;
-            axios.get("/show-suppliers/" + this.$route.params.slug).then((response) => {
+            axios.get("/show-suppliers/" + this.$route.params.s_slug).then((response) => {
                 this_.form.fill(response.data[1])
                 // console.log(response.data[1])
             }).catch(() => {
@@ -169,7 +169,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.get("remove-category/" + slug).then((response) => {
-                        this.$store.dispatch("getCategories"),
+                        this.$store.dispatch("getSuppliers"),
                             // toastr.success('Category Deleted Successfully !!')
                             swalWithBootstrapButtons.fire(
                                 'Deleted!',
@@ -192,7 +192,7 @@ export default {
             })
         },
         emptyData() {
-            return (this.categories.length < 1);
+            return (this.suppliers.length < 1);
         }
     }
 }

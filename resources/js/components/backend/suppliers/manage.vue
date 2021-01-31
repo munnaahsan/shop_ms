@@ -143,7 +143,7 @@
                                     <td>{{ supplier.s_address }}</td>
                                     <td>{{ supplier.s_remarks }}</td>
                                     <td>
-                                        <router-link class="text-cyan" :to="`/edit-supplier/${supplier.slug}`"><i class="fas fa-edit"></i></router-link>
+                                        <router-link class="text-cyan" :to="`/edit-supplier/${supplier.s_slug}`"><i class="fas fa-edit"></i></router-link>
                                         <span class="text-danger" @click="remove(supplier.slug)" style="cursor: pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>

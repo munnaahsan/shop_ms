@@ -52072,7 +52072,7 @@ var render = function() {
                                 {
                                   staticClass: "text-cyan",
                                   attrs: {
-                                    to: "/edit-supplier/" + supplier.slug
+                                    to: "/edit-supplier/" + supplier.s_slug
                                   }
                                 },
                                 [_c("i", { staticClass: "fas fa-edit" })]

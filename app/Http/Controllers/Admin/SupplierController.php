@@ -74,7 +74,7 @@ class SupplierController extends Controller
      */
     public function show($slug)
     {
-        $category = Supplier::where('slug', $slug)->first();
+        $category = Supplier::where('s_slug', $slug)->first();
 
         return response()->json(['category', $category], 200);
     }
