@@ -283,7 +283,7 @@ export default {
                     toastr.success("Category Created successfully")
                     // $('#category-add').modal('hide');
                     this.hideForm = false
-                    this.$store.dispatch("getSuppliers")
+                    this.$store.dispatch("getCustomers")
                     // category.$router.push("/categories");
                     customer.form.c_name = null;
                     customer.form.c_phone = null;

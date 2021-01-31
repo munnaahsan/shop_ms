@@ -2899,7 +2899,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.hideForm = false;
 
-        _this.$store.dispatch("getSuppliers"); // category.$router.push("/categories");
+        _this.$store.dispatch("getCustomers"); // category.$router.push("/categories");
 
 
         customer.form.c_name = null;
