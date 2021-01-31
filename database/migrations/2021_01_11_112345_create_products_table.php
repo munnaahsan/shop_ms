@@ -15,21 +15,22 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('uom_id');  //Foreign
             $table->string('p_name');
-            $table->foreignId('category_id');
             $table->string('p_sku');
-            $table->number('uom_id');  //Foreign
-            $table->number('p_quantity');
-            $table->number('p_price');
+            $table->integer('p_quantity');
+            $table->integer('p_price');
             $table->string('p_image');
             $table->string('p_color')->nullable();
-            $table->string('p_size');           
+            $table->string('p_size');
             $table->string('p_brand');
             $table->string('p_barcode')->unique();
-            $table->boolean('p_status');            
+            $table->boolean('p_status');
             $table->string('p_keyword');
             $table->string('p_remarks');
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreign('uom_id')->references('id')->on('uoms')->cascadeOnDelete();
             $table->timestamps();
 
         });
