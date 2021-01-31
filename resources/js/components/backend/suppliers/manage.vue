@@ -143,7 +143,7 @@
                                     <td>{{ supplier.s_address }}</td>
                                     <td>{{ supplier.s_remarks }}</td>
                                     <td>
-                                        <router-link class="text-cyan" :to="`/edit-supplier/${supplier.s_slug}`"><i class="fas fa-edit"></i></router-link>
+                                        <router-link class="text-cyan" :to="`/edit-supplier/${supplier.slug}`"><i class="fas fa-edit"></i></router-link>
                                         <span class="text-danger" @click="remove(supplier.slug)" style="cursor: pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </span>
@@ -227,13 +227,13 @@ export default {
                     //     icon: 'success',
                     //     title: 'Category Created successfully'
                     // })
-                    toastr.success("Category Created successfully")
+                    toastr.success("Supplier Created successfully")
                     // $('#category-add').modal('hide');
                     this.hideForm = false
                     this.$store.dispatch("getSuppliers")
                     // category.$router.push("/categories");
                     supplier.form.s_name = null;
-                    supplier.form.s_contact = null;
+                    supplier.form.s_phone = null;
                     supplier.form.s_email = null;
                     supplier.form.s_address = null;
                     supplier.form.s_remarks = null;

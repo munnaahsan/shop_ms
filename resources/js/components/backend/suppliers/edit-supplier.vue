@@ -27,12 +27,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="s_contact">Contact</label>
-                                            <input type="tel" name="s_contact" id="s_contact"
-                                                   maxlength="11" pattern="[0-9]{11}" placeholder="Enter Contact Number" class="form-control"
-                                                   :class="{'is-invalid': form.errors.has('s_contact')}"
-                                                   v-model="form.s_contact">
-                                            <has-error :form="form" field="s_contact"></has-error>
+                                            <label for="s_phone">Contact</label>
+                                            <input type="tel" name="s_phone" id="s_phone"
+                                                   maxlength="11" pattern="[0-9]{11}" placeholder="Enter Your Contact Number" class="form-control"
+                                                   :class="{'is-invalid': form.errors.has('s_phone')}"
+                                                   v-model="form.s_phone">
+                                            <has-error :form="form" field="s_phone"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -42,7 +42,7 @@
                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Enter Your E-Mail" class="form-control"
                                                    :class="{'is-invalid': form.errors.has('s_email')}"
                                                    v-model="form.s_email">
-                                            <has-error :form="form" field="s_contact"></has-error>
+                                            <has-error :form="form" field="s_email"></has-error>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -84,119 +84,137 @@
 
 <!--                        </div>-->
 <script>
-export default {
-    name: "manage",
-    data: function() {
-        return {
-            form: new Form({
-                id: null,
-                s_name: null,
-                s_contact: null,
-                slug: null,
-                s_email: null,
-                s_address: null,
-                s_remarks: null,
-            }),
-            categoryIds: []
-        }
-    },
-    computed: {
-        suppliers() {
-            return this.$store.getters.suppliers
-        }
-    },
-    mounted() {
-        // By Mounted Hit A Method of actions option of js file
-        // Whenever Load The Component Data will get from database
-        // By The actions option of js file
-        this.$store.dispatch("getCategories");
-        this.editSupplier();
-    },
-    methods: {
-        updateSupplier: function() {
-            // console.log('test');
-            let this_ = this;
-            this.form.post('/update-supplier')
-                .then((response) => {
-                    toastr.success("Supplier Updated successfully")
-                    this_.$router.push("/suppliers")
-                    // console.log(data)
-                    // Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'Category Created successfully'
-                    // })
-                    // this.$store.dispatch("getCategories")
-                    // $('#category-add').modal('hide');
-                    // category.$router.push("/categories");
-                })
+    export default {
+        name: "manage",
+        data: function() {
+            return {
+                form: new Form({
+                    id: null,
+                    s_name: null,
+                    s_phone: null,
+                    slug: null,
+                    s_email: null,
+                    s_address: null,
+                    s_remarks: null,
+                }),
+                categoryIds: []
+            }
         },
-        editSupplier: function() {
-            const this_ = this;
-            axios.get("/show-suppliers/" + this.$route.params.slug).then((response) => {
-                this_.form.fill(response.data[1])
-                // console.log(response.data[1])
-            }).catch(() => {
-
-            })
+        computed: {
+            suppliers() {
+                return this.$store.getters.suppliers
+            }
         },
-        statusName: function(status) {
-            let data = { 0: "Inactive", 1: "Active" }
-
-            return data[status];
+        mounted() {
+            // By Mounted Hit A Method of actions option of js file
+            // Whenever Load The Component Data will get from database
+            // By The actions option of js file
+            this.$store.dispatch("getSuppliers");
+            this.editSupplier();
         },
-        statusColor: function(status) {
-            let data = { 0: "badge-danger", 1: "badge-success" }
-
-            return data[status];
-        },
-        remove: function(slug) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.get("remove-category/" + slug).then((response) => {
-                        this.$store.dispatch("getCategories"),
-                            // toastr.success('Category Deleted Successfully !!')
-                            swalWithBootstrapButtons.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                    }).catch((error) => {
-
+        methods: {
+            updateSupplier: function() {
+                // console.log('test');
+                let this_ = this;
+                this.form.post('/update-supplier')
+                    .then((response) => {
+                        toastr.success("Supplier Updated successfully")
+                        this_.$router.push("/suppliers")
+                        // console.log(data)
+                        // Toast.fire({
+                        //     icon: 'success',
+                        //     title: 'Category Created successfully'
+                        // })
+                        // this.$store.dispatch("getSuppliers")
+                        // $('#category-add').modal('hide');
+                        // category.$router.push("/categories");
                     })
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
-            })
-        },
-        emptyData() {
-            return (this.categories.length < 1);
+            },
+            editSupplier: function() {
+                const this_ = this;
+                axios.get("/show-suppliers/" + this.$route.params.slug).then((response) => {
+                    this_.form.fill(response.data[1])
+                    // console.log(this_.response.data[1])
+                }).catch(() => {
+
+                })
+            },
+            statusName: function(status) {
+                let data = { 0: "Inactive", 1: "Active" }
+
+                return data[status];
+            },
+            statusColor: function(status) {
+                let data = { 0: "badge-danger", 1: "badge-success" }
+
+                return data[status];
+            },
+            remove: function(slug) {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.get("remove-category/" + slug).then((response) => {
+                            this.$store.dispatch("getSuppliers"),
+                                // toastr.success('Category Deleted Successfully !!')
+                                swalWithBootstrapButtons.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                )
+                        }).catch((error) => {
+
+                        })
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'Your imaginary file is safe :)',
+                            'error'
+                        )
+                    }
+                })
+            },
+            emptyData() {
+                return (this.suppliers.length < 1);
+            }
         }
     }
-}
 
 </script>
 <style scoped>
+    #pdf:hover{
+        color: #f9d6d5;
+    }
+    #s_phone:valid {
+        color: green;
+    }
+
+    #s_phone:invalid {
+        color: red;
+    }
+
+    #s_email:valid {
+        color: green;
+    }
+
+    #s_email:invalid {
+        color: red;
+    }
 </style>

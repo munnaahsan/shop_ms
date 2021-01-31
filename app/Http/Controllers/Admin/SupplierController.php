@@ -51,7 +51,7 @@ class SupplierController extends Controller
         $supplier = new Supplier;
         $supplier->s_name = $request->s_name;
         $supplier->s_phone = $request->s_phone;
-        $supplier->s_slug = slugify($request->s_name);
+        $supplier->slug = slugify($request->s_name);
         $supplier->s_email = $request->s_email;
         $supplier->s_address = $request->s_address;
         $supplier->s_remarks = $request->s_remarks;
@@ -74,9 +74,9 @@ class SupplierController extends Controller
      */
     public function show($slug)
     {
-        $category = Supplier::where('s_slug', $slug)->first();
+        $supplier = Supplier::where('slug', $slug)->first();
 
-        return response()->json(['category', $category], 200);
+        return response()->json(['supplier', $supplier], 200);
     }
 
     /**
@@ -101,14 +101,14 @@ class SupplierController extends Controller
     {
         $request->validate([
             's_name' => 'required|min:5|max:100',
-            's_contact' => 'required|numeric',
+            's_phone' => 'required|numeric',
             's_email' => 'required|email',
             's_address' => 'required',
             's_remarks' => 'required'
         ]);
         $supplier = Supplier::find($request->id);
         $supplier->s_name = $request->s_name;
-        $supplier->s_contact = $request->s_contact;
+        $supplier->s_phone = $request->s_phone;
         $supplier->slug = slugify($request->s_name);
         $supplier->s_email = $request->s_email;
         $supplier->s_address = $request->s_address;
