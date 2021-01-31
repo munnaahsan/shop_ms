@@ -192,19 +192,19 @@
                     <li class="nav-item">
                         <router-link to="/customers" class="nav-link">
                             <i class="nav-icon fas fa-list-alt"></i>
-                            <p>
+                            <p> 
+                            
                                 Customers
                             </p>
                         </router-link>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <router-link to="/posts" class="nav-link">--}}
-{{--                            <i class="nav-icon fas fa-pen-square"></i>--}}
-{{--                            <p>--}}
-{{--                                Posts--}}
-{{--                            </p>--}}
-{{--                        </router-link>--}}
-{{--                    </li>--}}
+                   <li class="nav-item">
+                       <router-link to="/products" class="nav-link">
+                           <i class="nav-icon fas fa-pen-square"></i>
+                           <p>
+                               Products
+                           </p>
+                       </router-link>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

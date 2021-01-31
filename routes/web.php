@@ -36,3 +36,7 @@ Route::get('/remove-supplier/{slug}', 'Admin\SupplierController@destroy');
 
 Route::get('/get-customers', 'Admin\CustomerController@index');
 Route::post('/add-customers', 'Admin\CustomerController@store')->name('add-customers');
+
+// Route::get('/get-products', 'Admin\ProductController@index');
+
+
