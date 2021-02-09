@@ -10,6 +10,8 @@
 //Toastr
 @import "~toastr/toastr";
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Webpack example
+@import '~bootstrap';
+@import '~bootstrap-vue';
 //Admin Lte
 @import '~admin-lte/dist/css/adminlte.min.css';

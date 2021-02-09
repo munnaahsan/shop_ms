@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.21.1",
-        "bootstrap": "^4.0.0",
+        "bootstrap": "^4.6.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
@@ -20,14 +20,16 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
-        "vue": "^2.5.17",
+        "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
         "admin-lte": "^3.1.0-rc",
+        "bootstrap-vue": "^2.21.2",
         "jspdf": "^2.3.0",
         "jspdf-autotable": "^3.5.13",
+        "laravel-vue-datatable": "^0.6.0",
         "sweetalert2": "^10.13.0",
         "toastr": "^2.1.4",
         "vform": "^1.0.1",
