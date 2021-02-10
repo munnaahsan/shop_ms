@@ -93,18 +93,18 @@
                     <slot name="headCell1" :rows="row"></slot>
                 </template>
             </b-table>
-            <b-row>
-                <b-col sm="12" md="12" class="mt-0">
-                    <b-pagination
-                        v-model="currentPage"
-                        :total-rows="totalList"
-                        :per-page="perPage"
-                        align="right"
-                        size="sm"
-                        class="my-0"
-                        ></b-pagination>
-                </b-col>
-            </b-row>
+<!--            <b-row>-->
+<!--                <b-col sm="12" md="12" class="mt-0">-->
+<!--                    <b-pagination-->
+<!--                        v-model="currentPage"-->
+<!--                        :total-rows="totalList"-->
+<!--                        :per-page="perPage"-->
+<!--                        align="right"-->
+<!--                        size="sm"-->
+<!--                        class="my-0"-->
+<!--                        ></b-pagination>-->
+<!--                </b-col>-->
+<!--            </b-row>-->
         </b-col>
     </b-row>
 </template>
