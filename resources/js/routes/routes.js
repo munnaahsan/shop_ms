@@ -1,5 +1,5 @@
 import home from "../components/backend/home";
-import categories from "../components/backend/category/manage";
+import categories from "../components/backend/b-category/manage";
 import editCategory from "../components/backend/category/edit-category";
 import suppliers from "../components/backend/suppliers/manage";
 import editSupplier from "../components/backend/suppliers/edit-supplier";

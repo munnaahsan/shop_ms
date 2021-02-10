@@ -20,6 +20,7 @@ export default {
             // console.log("text")
             axios.get("get-categories")
                 .then((response) => {
+                    // console.log(response)
                     data.commit("categories", response.data.categories)
                 }).catch((error) => {
 
