@@ -43,7 +43,7 @@
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments fa-2x"></i>
+                    <i class="fas fa-comments fa-2x"></i>
                     <span class="badge badge-danger navbar-badge">3</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -192,8 +192,8 @@
                     <li class="nav-item">
                         <router-link to="/customers" class="nav-link">
                             <i class="nav-icon fas fa-list-alt"></i>
-                            <p> 
-                            
+                            <p>
+
                                 Customers
                             </p>
                         </router-link>

@@ -1,54 +1,59 @@
 <template>
     <div>
         <b-container>
-            <b-row>
-                <b-col md="8" offset="2">
-                    <b-card v-if="show">
-                        <b-form @submit="onSubmit" @reset="onReset">
-                            <b-form-group
-                                id="input-group-1"
-                                label="Email address:"
-                                label-for="input-1"
-                                description="We'll never share your email with anyone else.">
-                                <b-form-input
-                                    id="input-1"
-                                    v-model="form.email"
-                                    type="email"
-                                    placeholder="Enter email"
-                                    required
-                                ></b-form-input>
-                            </b-form-group>
+            <b-collapse id="my-collapse">
+                    <b-row id="display">
+                        <b-col md="12">
+                            <b-card>
+                                <b-form @submit.prevent="addCategory">
+                                    <b-row>
+                                        <b-col md="6">
+                                            <b-form-group
+                                                id="name"
+                                                label="Name"
+                                                label-for="name">
+                                                <b-form-input
+                                                    id="name"
+                                                    v-model="form.name"
+                                                    :class="{'is-invalid': form.errors.has('name')}"
+                                                    type="text"
+                                                    placeholder="Enter your name"
+                                                ></b-form-input>
+                                            </b-form-group>
+                                        </b-col>
+                                        <b-col md="6">
+                                            <b-form-group id="remarks" label="Remarks" label-for="remarks">
+                                                <b-form-textarea
+                                                    id="remarks"
+                                                    v-model="form.remarks"
+                                                    :class="{'is-invalid': form.errors.has('remarks')}"
+                                                    placeholder="Enter your remarks..."
+                                                    rows="1"
+                                                    style="height: 2.3rem"
+                                                    max-rows="6"
+                                                ></b-form-textarea>
+                                            </b-form-group>
+                                        </b-col>
+                                    </b-row>
 
-                            <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-                                <b-form-input
-                                    id="input-2"
-                                    v-model="form.name"
-                                    placeholder="Enter name"
-                                    required
-                                ></b-form-input>
-                            </b-form-group>
+                                    <b-row>
+                                        <b-col md="12" class="d-flex justify-content-end">
+                                            <b-button-group>
+                                                <b-button v-b-tooltip.hover.top="'Save'" type="submit" size="sm" variant="outline-primary"><b-icon icon="file-earmark-post-fill" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
+                                                </b-button>
+                                                <b-button v-b-tooltip.hover.bottom="'Reset'" type="reset" size="sm"><b-icon icon="arrow-clockwise" animation="spin" font-scale="1"></b-icon>
+                                                </b-button>
+                                                <b-button v-b-tooltip.hover.bottom="'Cancel'" type="button" size="sm" variant="danger" v-b-toggle.my-collapse><b-icon icon="x-diamond" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
+                                                </b-button>
+                                            </b-button-group>
+                                        </b-col>
+                                    </b-row>
+                                </b-form>
+                            </b-card>
+                        </b-col>
+                    </b-row>
+            </b-collapse>
 
-                            <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-                                <b-form-select
-                                    id="input-3"
-                                    v-model="form.food"
-                                    :options="foods"
-                                    required
-                                ></b-form-select>
-                            </b-form-group>
-
-                            <b-row>
-                                <b-col md="12" class="d-flex justify-content-end">
-                                    <b-button-group>
-                                        <b-button type="submit" variant="primary">Submit</b-button>
-                                        <b-button type="reset" v-on:click="show = !show" variant="danger">Reset</b-button>
-                                    </b-button-group>
-                                </b-col>
-                            </b-row>
-                        </b-form>
-                    </b-card>
-                </b-col>
-            </b-row>
 
             <b-card>
                 <b-row>
@@ -67,10 +72,7 @@
                         </b-form-group>
                     </b-col>
                     <b-col>
-                        <span href="javascript:void(0)" class="btn btn-info float-right mb-2 btn-sm" id="add"
-                              v-on:click="show = !show" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
-                                    <i class="fas fa-plus-circle"></i> Add
-                        </span>
+                        <b-button v-b-toggle.my-collapse class="btn btn-info font-weight-bolder float-right btn-sm" :variant="btnVariant" id="add" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">{{ btnTxt }}</b-button>
                     </b-col>
                     <b-col :sm="searchSize" :md="searchSize" class="my-1 ml-auto">
                         <b-input-group size="sm">
@@ -102,11 +104,11 @@
                             <template v-slot:cell(index)="row" v-else>
                                 {{ (perPage * (currentPage-1)) + (row.index + 1) }}
                             </template>
+<!--                            :to="`/edit-category/${row.item.slug}`" @click="editRow"-->
                             <template #cell(action)="row" v-slot:actions="{ rows }">
-                                <b-link ml="4" class="text-primary" :to="`/edit-category/${categories[0].slug}`">
-                                    <b-icon icon="pencil-square" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
+                                <b-link ml="4" class="text-primary" :to="`/edit-category/${row.item.slug}`"><b-icon icon="pencil-square" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
                                 </b-link>
-                                <b-link class="text-danger" v-b-modal="'family-remove'" @click="deletedItem = rows.item">
+                                <b-link class="text-danger" @click="remove(row.item.slug)">
                                     <b-icon icon="trash2-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>
                                 </b-link>
                             </template>
@@ -180,16 +182,17 @@
         data() {
             return {
                 form: new Form({
+                    id: null,
                     name: null,
-                    slug: null,
                     remarks: null,
                 }),
                 show: false,
+                hidenseek: true,
                 rawInput: null,
                 items: [],
                 totalList: 1,
                 totalRows: 1,
-                perPage: 2,
+                perPage: 5,
                 currentPage:1,
                 pageOptions: [5, 10, 15],
                 sortBy: '',
@@ -198,10 +201,11 @@
                 filter: null,
                 deletedItem: null,
                 filterOn: [],
+                collapsed: false,
                 pageSize: (this.pageColSize != undefined) ? this.pageColSize : '2',
                 searchSize: (this.searchColSize != undefined) ? this.searchColSize : '3',
                 fields: [
-                    { key: 'index', label: 'Sl'},
+                    { key: 'index', label: 'index'},
                     { key: 'name', label: 'Name',   name: 'name', sortable: true },
                     { key: 'slug', label: 'Slug',  name: 'slug', sortable: true },
                     { key: 'remarks', label: 'Remarks',  name: 'remarks', sortable: true }, 'action']
@@ -213,6 +217,14 @@
             },
             rows(){
                 return this.categories.length
+            },
+            btnVariant: function () {
+                return this.collapsed?
+                    'danger' : 'info'
+            },
+            btnTxt:  function () {
+                return this.collapsed?
+                    '➖ Close' : '➕ Add';
             }
         },
         mounted() {
@@ -221,7 +233,17 @@
             // By The actions option of js file
             // document.querySelector('#display').style.display = 'none';
             this.$store.dispatch("getCategories");
-            $('#pdf').tooltip()
+            $('#pdf').tooltip();
+            this.$root.$on(
+                'bv::collapse::state',
+                // id of the collapse component
+                // collapse is the state
+                // true => open, false => close
+                (id, collapsed) => {
+                    if (id === "my-collapse") {
+                        this.collapsed = collapsed;
+                    }
+                });// $on
             // this.editCategory();
         },
         watch: {
@@ -261,7 +283,8 @@
                         // })
                         toastr.success("Category Created successfully")
                         // $('#category-add').modal('hide');
-                        this.hideForm = false
+                        document.querySelector('#display').style.display = 'none';
+                        location.reload();
                         this.$store.dispatch("getCategories")
                         // category.$router.push("/categories");
                         category.form.name = null;
@@ -382,6 +405,9 @@
                         console.log(err);
                     });
                 }
+            },
+            removeRow(index) {
+                this.categories.splice(index,1)
             }
         }
     }
