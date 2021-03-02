@@ -66,8 +66,7 @@
                             label-align-sm="left"
                             label-size="sm"
                             label-for="perPageSelect"
-                            class="mb-0"
-                        >
+                            class="mb-0">
                             <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
                         </b-form-group>
                     </b-col>
@@ -82,8 +81,7 @@
                                 label-align-sm="right"
                                 id="filterInput"
                                 placeholder="Type to Search"
-                                :debounce="200"
-                            ></b-form-input>
+                                :debounce="200"></b-form-input>
                             <b-input-group-append>
                                 <b-button class="data-table-filter" :disabled="!filter" @click="clear()">Clear</b-button>
                             </b-input-group-append>
@@ -97,7 +95,10 @@
                                  :fields="fields"
                                  :items="categories"
                                  :per-page="perPage"
-                                 :current-page="currentPage">
+                                 :current-page="currentPage"
+                                 :filter-ignored-fields="filterIgnoredFields"
+                                 :filter-included-fields="filterIncludedFields"
+                                 @filtered="onFiltered">
                             <template v-slot:cell(index)="row" v-if="currentPage <= 1">
                                 {{ (row.index + 1) }}
                             </template>
@@ -129,47 +130,6 @@
                     </b-col>
                 </b-row>
             </b-card>
-<!--            <b-card>-->
-<!--                <b-row>-->
-<!--                    <b-col>-->
-<!--                        <span href="javascript:void(0)" class="btn btn-info float-right mb-2 btn-sm" id="add"-->
-<!--                              v-on:click="show = !show" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">-->
-<!--                                    <i class="fas fa-plus-circle"></i> Add-->
-<!--                        </span>-->
-<!--                    </b-col>-->
-<!--                </b-row>-->
-<!--                <b-card-body class="border">-->
-<!--                    <Datatable v-bind:fields="fields" v-bind:items="categories" :totalList="totalList" :perPage="perPage"-->
-<!--                               :primaryKeyColumnName="'id'">-->
-<!--                        <template v-slot:actions="{ rows }">-->
-<!--                            <b-link ml="4" class="text-primary" :to="`/edit-category/${categories[0].slug}`">-->
-<!--                                <b-icon icon="pencil-square" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>-->
-<!--                            </b-link>-->
-<!--                            <b-link class="text-danger" v-b-modal="'family-remove'" @click="deletedItem = rows.item">-->
-<!--                                <b-icon icon="trash2-fill" scale="1.25" shift-v="1.25" aria-hidden="true"></b-icon>-->
-<!--                            </b-link>-->
-<!--                        </template>-->
-<!--                    </Datatable>-->
-<!--                    <b-row>-->
-<!--                        <b-col sm="12" md="12" class="mt-0">-->
-<!--                            <b-pagination-->
-<!--                                v-model="currentPage"-->
-<!--                                :total-rows="rows"-->
-<!--                                :per-page="perPage"-->
-<!--                                align="right"-->
-<!--                                size="sm"-->
-<!--                                class="my-0"-->
-<!--                            ></b-pagination>-->
-<!--                        </b-col>-->
-<!--                    </b-row>-->
-<!--                    <b-modal :id="'family-remove'" :centered="true" title="Please Confirm" size="sm"-->
-<!--                             buttonSize="sm" okTitle="YES" cancelTitle="NO" footerClass="p-2"-->
-<!--                             :hideHeaderClose="false"-->
-<!--                             @ok="deleteRow()" @hidden="deletedItem = null">-->
-<!--                        <div>Are you sure you want to delete?</div>-->
-<!--                    </b-modal>-->
-<!--                </b-card-body>-->
-<!--            </b-card>-->
         </b-container>
     </div>
 </template>
@@ -211,6 +171,7 @@
                     { key: 'remarks', label: 'Remarks',  name: 'remarks', sortable: true }, 'action']
             }
         },
+        props: ["totalList","tbodyTrClass", "items", "pageColSize", "searchColSize", "filterIgnoredFields", 'filterIncludedFields','sortBy'],
         computed: {
             categories() {
                 return this.$store.getters.categories
@@ -264,6 +225,12 @@
                 }
                 this.isSelected = (selected.length > 0);
                 this.multiDelete = (selected.length === this.categories.length);
+            },
+            rawInput(newVal, oldVal) {
+                clearTimeout(this.$_timeout)
+                this.$_timeout = setTimeout(() => {
+                    this.filter = newVal;
+                }, 150) // set this value to your preferred debounce timeout
             }
         },
         methods: {

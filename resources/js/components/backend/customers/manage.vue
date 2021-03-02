@@ -31,7 +31,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="c_email">E-Mail</label>
-                                            <input type="tel" name="c_email" id="c_email"
+                                            <input type="email" name="c_email" id="c_email"
                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                    placeholder="Enter Your E-Mail" class="form-control"
                                                    :class="{'is-invalid': form.errors.has('c_email')}"
@@ -52,7 +52,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="c_type">Customer Type</label>
-                                            <input type="tel" name="c_type" id="c_type" placeholder="Enter Customer Type" class="form-control"
+                                            <input type="text" name="c_type" id="c_type" placeholder="Enter Customer Type" class="form-control"
                                                    :class="{'is-invalid': form.errors.has('c_type')}"
                                                    v-model="form.c_type">
                                             <has-error :form="form" field="c_type"></has-error>

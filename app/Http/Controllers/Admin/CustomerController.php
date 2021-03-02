@@ -51,4 +51,11 @@ class CustomerController extends Controller
 //            'slug' => slugify($request->s_name)
 //        ]);
     }
+
+    public function show()
+    {
+        $customer = Customer::where('slug', $slug)->first();
+
+        return response()->json(['customer', $customer], 200);
+    }
 }
