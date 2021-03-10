@@ -115,7 +115,7 @@
                                                     <b-icon icon="plus-square-fill" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
                                                 </b-button>
                                                 <b-button
-                                                    data-toggle="tooltip" v-if="addCouponField"
+                                                    data-toggle="tooltip" v-else
                                                     data-placement="bottom"
                                                     v-b-tooltip.hover.top="'Close Coupon Field'" 
                                                     type="button" size="sm" 
@@ -124,16 +124,18 @@
                                                     v-on:click="addCoupon = !addCoupon,addCouponField = false">
                                                     <i class="fas fa-minus"></i>
                                                 </b-button>
-                                                <b-button
-                                                    data-toggle="tooltip" v-if="addCoupon"
-                                                    data-placement="bottom"
-                                                    v-b-tooltip.hover.top="'Add Coupon'"
-                                                    id="add_coupon_text"
-                                                    v-on:click="add_coupon"
-                                                    type="button" size="sm" 
-                                                    variant="outline-primary">
-                                                    <b-icon icon="plus-square" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
-                                                </b-button>
+                                                <transition name="slide-fade">
+                                                		<b-button
+		                                                    data-toggle="tooltip" v-if="addCoupon"
+		                                                    data-placement="bottom"
+		                                                    v-b-tooltip.hover.top="'Add Coupon'"
+		                                                    id="add_coupon_text"
+		                                                    v-on:click="add_coupon"
+		                                                    type="button" size="sm" 
+		                                                    variant="outline-primary">
+		                                                    <b-icon icon="plus-square" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
+	                                                  </b-button>
+                                                </transition>                                                
                                             </b-button-group>
                                             <b-button-group>
                                                 <b-button v-b-tooltip.hover.top="'Save'" type="submit" size="sm" variant="outline-primary"><b-icon icon="file-earmark-post-fill" scale="1" shift-v="1.25" aria-hidden="true"></b-icon>
@@ -503,4 +505,18 @@ export default {
     #c_email:invalid {
         color: red;
     }
+
+    .slide-fade-enter-active {
+  		transition: all .3s ease-out;
+	}
+
+	.slide-fade-leave-active {
+	  	transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
+
+	.slide-fade-enter-from,
+	.slide-fade-leave-to {
+	  	transform: translateX(-20px);
+	  	opacity: 0;
+	}
 </style>

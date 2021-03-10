@@ -2,7 +2,8 @@ export default {
     state: {
         supplierData: [],
         categoryData: [],
-        customerData: []
+        customerData: [],
+        productData: [],
     },
     getters: {
         categories(state) {
@@ -13,6 +14,9 @@ export default {
         },
         customers(state) {
             return state.customerData
+        },
+        products(state) {
+            return state.productData
         }
     },
     actions: {
@@ -20,7 +24,7 @@ export default {
             // console.log("text")
             axios.get("get-categories")
                 .then((response) => {
-                    // console.log(response)
+                    // console.log(response.data.categories)
                     data.commit("categories", response.data.categories)
                 }).catch((error) => {
 
@@ -43,6 +47,15 @@ export default {
                     data.commit("customers", response.data.customers)
                 }).catch((error) => {
             })
+        },
+        getProducts(data) {
+            // console.log("text")
+            axios.get("get-products")
+                .then((response) => {
+                    // console.log(response)
+                    data.commit("products", response.data.products)
+                }).catch((error) => {
+            })
         }
     },
     mutations: {
@@ -54,6 +67,9 @@ export default {
         },
         customers(state, data) {
             state.customerData = data
+        },
+        products(state, data) {
+            state.productData = data
         }
     }
 }

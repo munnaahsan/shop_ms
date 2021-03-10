@@ -5,7 +5,7 @@ import suppliers from "../components/backend/suppliers/manage";
 import editSupplier from "../components/backend/suppliers/edit-supplier";
 import customers from "../components/backend/b-customers/manage";
 import editCustomer from "../components/backend/b-customers/edit-customer";
-import products from '../components/backend/products/manage';
+import products from '../components/backend/b-products/manage';
 import editProduct from '../components/backend/products/edit-product';
 
 export const routes = [
