@@ -12,7 +12,11 @@
                                             id="category_id"
                                             label="Category Name"
                                             label-for="category_id">
-                                            <b-form-select v-model="form.category_id" :options="categories.name"></b-form-select>
+                                            <select v-for="product in products" class="form-control" name="" id="">
+                                                <option value="">Select One</option>
+                                                <option :value="product.category.id">{{ product.category.name }}</option>
+                                            </select>
+<!--                                            <b-form-select v-model="form.category_id" :options="options"></b-form-select>-->
 <!--                                            <b-form-input-->
 <!--                                                id="category_id"-->
 <!--                                                v-model="form.category_id"-->
@@ -40,11 +44,10 @@
                                         <b-form-group id="p_price" label="Product Price" label-for="p_price">
                                             <b-form-input
                                                 id="p_price"
-                                                type="tel"
+                                                type="number"
                                                 v-model="form.p_price"
-                                                maxlength="11" pattern="[0-9]{11}"
                                                 :class="{'is-invalid': form.errors.has('p_price')}"
-                                                placeholder="Enter your phone..."
+                                                placeholder="Enter your product price"
                                             ></b-form-input>
                                         </b-form-group>
                                     </b-col>
@@ -63,7 +66,7 @@
                                         <b-form-group id="p_quantity" label="Product Quantity" label-for="p_quantity">
                                             <b-form-input
                                                 id="p_quantity"
-                                                type="text"
+                                                type="number"
                                                 v-model="form.p_quantity"
                                                 :class="{'is-invalid': form.errors.has('p_quantity')}"
                                                 placeholder="Enter your Product Brand"
@@ -196,7 +199,7 @@
                     </b-col>
                 </b-row>
             </b-card>
-            {{ catName }}
+<!--            {{ catName }}-->
         </b-container>
     </div>
 </template>
@@ -214,6 +217,10 @@ export default {
                 p_barcode: null,
                 p_status: null,
             }),
+            options: [
+                { value: '1', text: 'Chairman' },
+                { value: '2', text: 'Member (Finance)' },
+            ],
             show: false,
             hidenseek: true,
             rawInput: null,
@@ -263,7 +270,7 @@ export default {
                 '➖ Close' : '➕ Add';
         },
         catName: function(){
-            return this.categories[0].name
+            return this.products;
         },
     },
     mounted() {

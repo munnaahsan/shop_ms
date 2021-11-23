@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -15,11 +16,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
 
         return response()->json([
             'products' => $products
-        ]);
+        ], 200);
     }
 
     /**

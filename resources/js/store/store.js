@@ -52,7 +52,7 @@ export default {
             // console.log("text")
             axios.get("get-products")
                 .then((response) => {
-                    // console.log(response)
+                    console.log(response.data.products)
                     data.commit("products", response.data.products)
                 }).catch((error) => {
             })

@@ -10,11 +10,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_name">Product Name</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_name"
                                                    :class="{'is-invalid': form.errors.has('p_name')}"
-                                                   name="p_name" 
-                                                   placeholder="Enter Product Name" 
+                                                   name="p_name"
+                                                   placeholder="Enter Product Name"
                                                    type="text"
                                                    v-model="form.s_name">
                                             <has-error :form="form" field="p_name"></has-error>
@@ -23,10 +23,10 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_sku">Product SKU</label>
-                                            <input type="text" 
-                                                   name="p_sku" 
-                                                   id="p_sku" 
-                                                   placeholder="Enter Product Stock-Keeping Unit" 
+                                            <input type="text"
+                                                   name="p_sku"
+                                                   id="p_sku"
+                                                   placeholder="Enter Product Stock-Keeping Unit"
                                                    class="form-control"
                                                    :class="{'is-invalid': form.errors.has('p_sku')}"
                                                    v-model="form.p_sku">
@@ -36,11 +36,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_quantity">Product Quantity</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_quantity"
                                                    :class="{'is-invalid': form.errors.has('p_quantity')}"
-                                                   name="p_quantity" 
-                                                   placeholder="Enter Product Quantity" 
+                                                   name="p_quantity"
+                                                   placeholder="Enter Product Quantity"
                                                    type="text"
                                                    v-model="form.p_quantity">
                                             <has-error :form="form" field="p_quantity"></has-error>
@@ -51,11 +51,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_price">Product Price</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_price"
                                                    :class="{'is-invalid': form.errors.has('p_price')}"
-                                                   name="p_price" 
-                                                   placeholder="Enter Product Actual Price" 
+                                                   name="p_price"
+                                                   placeholder="Enter Product Actual Price"
                                                    type="number"
                                                    v-model="form.p_price">
                                             <has-error :form="form" field="p_price"></has-error>
@@ -64,10 +64,10 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_size">Product Size</label>
-                                            <input type="text" 
-                                                   name="p_size" 
-                                                   id="p_size" 
-                                                   placeholder="Enter Product Size" 
+                                            <input type="text"
+                                                   name="p_size"
+                                                   id="p_size"
+                                                   placeholder="Enter Product Size"
                                                    class="form-control"
                                                    :class="{'is-invalid': form.errors.has('p_size')}"
                                                    v-model="form.p_size">
@@ -77,11 +77,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_brand">Product Brand</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_brand"
                                                    :class="{'is-invalid': form.errors.has('p_brand')}"
-                                                   name="p_brand" 
-                                                   placeholder="Enter Product Brand" 
+                                                   name="p_brand"
+                                                   placeholder="Enter Product Brand"
                                                    type="text"
                                                    v-model="form.p_brand">
                                             <has-error :form="form" field="p_brand"></has-error>
@@ -92,11 +92,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_barcode">Product Barcode</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_barcode"
                                                    :class="{'is-invalid': form.errors.has('p_barcode')}"
-                                                   name="p_barcode" 
-                                                   placeholder="Enter Product Barcode" 
+                                                   name="p_barcode"
+                                                   placeholder="Enter Product Barcode"
                                                    type="number"
                                                    v-model="form.p_barcode">
                                             <has-error :form="form" field="p_barcode"></has-error>
@@ -105,8 +105,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_status">Product Status</label>
-                                            <select name="cars" 
-                                                    id="cars"
+                                            <select name="p_status"
+                                                    id="p_status"
                                                     class="form-control"
                                                     :class="{'is-invalid': form.errors.has('p_status')}"
                                                     v-model="form.p_status">
@@ -119,11 +119,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="p_keyword">Product Keyword</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_keyword"
                                                    :class="{'is-invalid': form.errors.has('p_keyword')}"
-                                                   name="p_keyword" 
-                                                   placeholder="Enter Product Brand" 
+                                                   name="p_keyword"
+                                                   placeholder="Enter Product Brand"
                                                    type="text"
                                                    v-model="form.p_keyword">
                                             <has-error :form="form" field="p_keyword"></has-error>
@@ -134,11 +134,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="p_remarks">Product Remarks</label>
-                                            <input class="form-control" 
+                                            <input class="form-control"
                                                    id="p_remarks"
                                                    :class="{'is-invalid': form.errors.has('p_remarks')}"
-                                                   name="p_remarks" 
-                                                   placeholder="Remarks Here" 
+                                                   name="p_remarks"
+                                                   placeholder="Remarks Here"
                                                    type="text"
                                                    v-model="form.p_remarks">
                                             <has-error :form="form" field="p_remarks"></has-error>
@@ -147,10 +147,10 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="p_color">Product Color</label>
-                                            <input type="text" 
-                                                   name="p_color" 
-                                                   id="p_color" 
-                                                   placeholder="Current Status" 
+                                            <input type="text"
+                                                   name="p_color"
+                                                   id="p_color"
+                                                   placeholder="Current Status"
                                                    class="form-control"
                                                    :class="{'is-invalid': form.errors.has('p_color')}"
                                                    v-model="form.p_color">
@@ -160,14 +160,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="p_image">Product Image</label>
-                                            <input type="file" 
-                                                   id="p_image" 
+                                            <input type="file"
+                                                   id="p_image"
                                                    name="p_image">
-                                            <!-- <input class="form-control" 
+                                            <!-- <input class="form-control"
                                                    id="p_image"
                                                    :class="{'is-invalid': form.errors.has('p_image')}"
-                                                   name="p_image" 
-                                                   placeholder="Enter Product Brand" 
+                                                   name="p_image"
+                                                   placeholder="Enter Product Brand"
                                                    type="file"
                                                    v-model="form.p_image"> -->
                                             <has-error :form="form" field="p_image"></has-error>
@@ -177,17 +177,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="btn-group float-right w-25" role="group" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);margin-top: 36px;">
-                                            <button class="btn btn-primary mr-2" 
-                                                    title="Save Product" 
+                                            <button class="btn btn-primary mr-2"
+                                                    title="Save Product"
                                                     type="submit">
                                                 <i class="fas fa-save fa-1x"></i>
                                             </button>
-                                            <button type="button" 
-                                                    class="btn btn-danger" 
-                                                    data-dismiss="modal" 
-                                                    data-toggle="tooltip" 
-                                                    @click="hide" 
-                                                    data-placement="top"  
+                                            <button type="button"
+                                                    class="btn btn-danger"
+                                                    data-dismiss="modal"
+                                                    data-toggle="tooltip"
+                                                    @click="hide"
+                                                    data-placement="top"
                                                     title="Hide Window">
                                                 <i class="fas fa-window-close"></i>
                                             </button>
@@ -208,21 +208,21 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
-                                            <button data-toggle="tooltip" 
-                                                    data-placement="bottom" 
+                                            <button data-toggle="tooltip"
+                                                    data-placement="bottom"
                                                     title="Delete"
                                                     :disabled="!isSelected"
-                                                    id="display" 
-                                                    class="btn btn-sm btn-outline-danger" 
+                                                    id="display"
+                                                    class="btn btn-sm btn-outline-danger"
                                                     type="button">
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                            <button style="cursor: pointer;background-image: linear-gradient(#7a9cac, #6fb6d4)" 
+                                            <button style="cursor: pointer;background-image: linear-gradient(#7a9cac, #6fb6d4)"
                                                     class="btn btn-sm border-0"
-                                                    @click="generatePDF" 
-                                                    id="pdf" 
-                                                    data-toggle="tooltip" 
-                                                    data-placement="bottom" 
+                                                    @click="generatePDF"
+                                                    id="pdf"
+                                                    data-toggle="tooltip"
+                                                    data-placement="bottom"
                                                     title="Generate PDF">
                                                 <i class="fas fa-file-pdf"></i>
                                             </button>
@@ -231,9 +231,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <span href="javascript:void(0)" 
-                                    class="btn btn-info float-right btn-sm" 
-                                    id="add"                
+                                <span href="javascript:void(0)"
+                                    class="btn btn-info float-right btn-sm"
+                                    id="add"
                                     v-on:click="hideForm = !hideForm" style="box-shadow: 3px 2px 10px rgba(0,0,0,0.3);">
                                     <i class="fas fa-plus-circle"></i> Add
                                 </span>
@@ -250,7 +250,7 @@
                                                type="checkbox" v-model="multiDelete">
                                     </th>
                                     <th>Sl</th>
-                                    <th>Name</th>      
+                                    <th>Name</th>
                                     <th>SKU</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
